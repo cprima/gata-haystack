@@ -23,7 +23,7 @@ run:
 # Run tests (assuming you have a test suite setup)
 test:
 	@echo "Activating virtual environment..."
-	source ${VENV_PATH}/Scripts/activate && ${PYTHON} -m unittest discover -s tests
+	source ${VENV_PATH}/Scripts/activate && ${PYTHON} -m pytest tests/test_get_releases.py
 
 # Clean up the project (remove pyc files, etc.)
 clean:

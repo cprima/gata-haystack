@@ -45,3 +45,58 @@ def get_uipath_machines():
         return render_template('machines.html', machines=machines)
     else:
         return jsonify({'error': 'Failed to retrieve data from API'}), api_response.status_code
+
+
+
+@routes.route('/uipath/get-processes')
+def get_process_data():
+    # Use the access token provided by the middleware
+    access_token = app.access_token
+
+    # Construct the API URL
+    api_url = app.config['UIPATH_CLOUD_BASEURL'].rstrip('/') + '/' + app.config['UIPATH_CLOUD_ORGNAME'] + '/' + app.config['UIPATH_CLOUD_TENANTNAME_CURRENT'] + '/orchestrator_/odata/Processes'
+
+    # Call the API with the access token
+    api_response = requests.get(
+        api_url,
+        headers={'Authorization': f'Bearer {access_token}'}
+    )
+
+    # Check for successful API response
+    if api_response.status_code == 200:
+        data = api_response.json()
+        # Further processing of data can be done here as required
+        return jsonify(data)
+    else:
+        return jsonify({'error': 'Failed to retrieve data from the UiPath API', 'status_code': api_response.status_code}), api_response.status_code
+
+
+@routes.route('/uipath/get-releases')
+def get_uipath_releases():
+    # Use the access token provided by the middleware
+    access_token = app.access_token
+
+    # Construct the API URL for the Releases endpoint
+    api_url = app.config['UIPATH_CLOUD_BASEURL'].rstrip('/') + '/' + app.config['UIPATH_CLOUD_ORGNAME'] + '/' + app.config['UIPATH_CLOUD_TENANTNAME_CURRENT'] + '/orchestrator_/odata/Releases'
+
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'X-UIPATH-OrganizationUnitId': '4962651'  # Set the OrganizationUnitId
+    }
+
+    # Call the API with the access token and additional headers
+    api_response = requests.get(api_url, headers=headers)
+
+    # Check for successful API response
+    if api_response.status_code == 200:
+        releases = api_response.json()
+        # You can process the data as needed here
+        return jsonify(releases)
+    else:
+        #return jsonify({'error': 'Failed to retrieve data from the UiPath API', 'status_code': api_response.status_code}), api_response.status_code
+        error_info = {
+            'error': 'Failed to retrieve data from the UiPath API',
+            'status_code': api_response.status_code,
+            'api_response': api_response.text  # Include API response text
+        }
+        return jsonify(error_info), api_response.status_code

@@ -1,0 +1,34 @@
+{
+    "@odata.context": "https://cloud.uipath.com/cprimadotnet/homelab23/orchestrator_/odata/$metadata#Processes",
+    "@odata.count": 1,
+    "value": [
+        {
+            "IsActive": false,
+            "SupportsMultipleEntryPoints": true,
+            "MainEntryPointPath": "Main.xaml",
+            "RequiresUserInteraction": true,
+            "IsAttended": false,
+            "TargetFramework": "Windows",
+            "Title": "BlankProcess",
+            "Version": "1.2.156084111",
+            "Key": "BlankProcess:1.2.156084111",
+            "Description": "Blank Process",
+            "Published": "2023-12-12T12:44:34.8933333Z",
+            "IsLatestVersion": false,
+            "OldVersion": null,
+            "ReleaseNotes": null,
+            "Authors": "runneradmin",
+            "ProjectType": "Process",
+            "Tags": "VisualBasic VB",
+            "IsCompiled": true,
+            "LicenseUrl": null,
+            "ProjectUrl": null,
+            "Id": "BlankProcess",
+            "Arguments": {
+                "Input": null,
+                "Output": null
+            },
+            "ResourceTags": []
+        }
+    ]
+}

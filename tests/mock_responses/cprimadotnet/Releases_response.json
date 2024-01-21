@@ -1,0 +1,50 @@
+{
+    "@odata.context": "https://cloud.uipath.com/cprimadotnet/homelab23/orchestrator_/odata/$metadata#Releases",
+    "@odata.count": 1,
+    "value": [
+        {
+            "Key": "b35b5f2d-4878-45de-ab4a-54f6ce825474",
+            "ProcessKey": "BlankProcess",
+            "ProcessVersion": "1.2.156084111",
+            "IsLatestVersion": false,
+            "IsProcessDeleted": false,
+            "Description": null,
+            "Name": "BlankProcess",
+            "EnvironmentId": null,
+            "EnvironmentName": "",
+            "EntryPointId": 2735848,
+            "EntryPointPath": null,
+            "InputArguments": null,
+            "ProcessType": "Process",
+            "SupportsMultipleEntryPoints": true,
+            "RequiresUserInteraction": true,
+            "IsAttended": false,
+            "IsCompiled": true,
+            "AutomationHubIdeaUrl": null,
+            "AutoUpdate": false,
+            "HiddenForAttendedUser": false,
+            "FeedId": "54bd0976-d6a7-41b2-809a-b7e1fc9481fa",
+            "JobPriority": "Normal",
+            "SpecificPriorityValue": 45,
+            "OrganizationUnitId": 4962651,
+            "OrganizationUnitFullyQualifiedName": "Shared",
+            "TargetFramework": "Windows",
+            "RobotSize": null,
+            "AutoCreateConnectedTriggers": true,
+            "RemoteControlAccess": "None",
+            "LastModificationTime": "2024-01-21T09:27:05.403Z",
+            "LastModifierUserId": 7860197,
+            "CreationTime": "2023-12-10T20:54:52.597Z",
+            "CreatorUserId": 7860197,
+            "Id": 1074303,
+            "Arguments": {
+                "Input": "[]",
+                "Output": "[]"
+            },
+            "ProcessSettings": null,
+            "VideoRecordingSettings": null,
+            "Tags": [],
+            "ResourceOverwrites": []
+        }
+    ]
+}
