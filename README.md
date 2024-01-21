@@ -59,6 +59,11 @@ This directory contains the main package of the Flask application and is further
 
 - The middleware/ subdirectory is an integral part of the application, housing the middleware components. Middleware in a Flask application acts as an intermediary layer that can process requests before they reach the route handlers and responses before they are sent back to the client. This directory includes implementations for various middleware functionalities that enhance the application's capabilities.
 
+## Documentation
+
+- For detailed documentation, including entity-relationship diagrams and design documents, please see the [docs](./docs) directory.
+
+
 ### Configuration Management
 
 - The application uses `python-dotenv` to load environment variables from the `.env` file. This allows us to keep sensitive information like API keys and secrets out of the source code.
