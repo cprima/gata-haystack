@@ -1,30 +1,70 @@
-# Organization of this repository
+# Project Gata Haystack
 
-This repository contains the full project and is therefore in an usual structure. When combining IT and business aspects (and a website is marketing is business) there exists a vey helpful method with [TOGAF](www.opengroup.org/subjectareas/enterprise/togaf "The TOGAF® framework is the de facto global standard for Enterprise Architecture.").
+## Requirements
 
-# ![biz][dot-app-16] applications deployed
+- Python virtualenv, e.g. `python -m venv O:\venv\flask-jinja2-authlib`
+- (in WSL) `make setup`
+- .env file with `DEVELOPMENT_UIPATH_CLIENT_ID="12345678-1234-5678-1234-567812345678"
+DEVELOPMENT_UIPATH_CLIENT_SECRET="s3cr3t#123456789"`
+- (in WSL) make run
 
-These applications are deployed within the solution, are specificially written for it and far from off-the-shelf.
+```bash
+$  make run
+Activating virtual environment...
+source /path/to/venv/flask-jinja2-authlib/Scripts/activate && /path/zo/venv/flask-jinja2-authlib/Scripts/python.exe app.py
+<Flask 'app'>
+ * Serving Flask app 'app' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.47.11.42:5000
+Press CTRL+C to quit
+ * Restarting with stat
+<Flask 'app'>
+ * Debugger is active!
+ * Debugger PIN: 123-456-789
+```
 
-## ![biz][dot-app-16] backend
+## Code Structure
 
-[./app/phy/backend](./app/phy/backend)
+This Flask project is structured to promote readability, maintainability, and separation of concerns, making it scalable for future development. Below is an overview of the key components and their roles in the application:
 
-# ![biz][dot-biz-16] business
+### Root Directory
 
-I am a business administration guy by trade and can't help but spot "biz" where I see it. The latest when hardware comes into play there is purchasing, maybe even a boll of materials 'BOM' and it doesn't help to put the ~~customer~~ user is in focus the terminology just fits.
+- `app.py`: The entry point of the Flask application. It creates and configures the Flask app instance.
+- `config.py`: Contains the configuration classes for different environments (development, production), utilizing environment variables for sensitive data.
+- `.env`: A file to store environment variables (not tracked in version control for security reasons).
+- `requirements.txt`: Lists all the Python dependencies that need to be installed.
 
-# ![biz][dot-dat-16] data
+### `app/` Directory
 
-This folder is typically used by scripts in ./application/physical to hold data in a predictable place. I tend to do a lot of curl'ing with checks for If-Modified-Since to be nice to the (mirror) servers.
+This directory contains the main package of the Flask application and is further divided into subdirectories and files:
 
-# ![biz][dot-tec-16] technology
+- `__init__.py`: Initializes the Flask app and brings together different components like routes, configurations, etc.
+- `routes.py`: Defines all the routes (URLs) of the application, including the logic for each route.
 
-About off-the-shelf technology used by the project.
+#### `templates/` Subdirectory
 
+- Contains Jinja2 templates for rendering HTML. These templates are used by the view functions in `routes.py` to present data to users in a web browser.
 
+#### `static/` Subdirectory
 
-[dot-biz-16]: https://user-images.githubusercontent.com/943871/32907435-4c388e1a-cb00-11e7-85e7-b060c9028399.png "biz"
-[dot-dat-16]: https://user-images.githubusercontent.com/943871/32907437-4d9e39f8-cb00-11e7-8dcf-697f7439860f.png "dat"
-[dot-app-16]: https://user-images.githubusercontent.com/943871/32907438-4f141938-cb00-11e7-8d9c-50723c4decef.png "app"
-[dot-tec-16]: https://user-images.githubusercontent.com/943871/32907440-5032be96-cb00-11e7-8cad-d7d16083ee5b.png "tec"
+- Houses static files like CSS, JavaScript, and images. This is where you would store your `favicon.ico` and any other static assets your application uses.
+
+#### `middleware/` Subdirectory
+
+- The middleware/ subdirectory is an integral part of the application, housing the middleware components. Middleware in a Flask application acts as an intermediary layer that can process requests before they reach the route handlers and responses before they are sent back to the client. This directory includes implementations for various middleware functionalities that enhance the application's capabilities.
+
+### Configuration Management
+
+- The application uses `python-dotenv` to load environment variables from the `.env` file. This allows us to keep sensitive information like API keys and secrets out of the source code.
+- `config.py` defines different configuration classes for various environments (like `DevelopmentConfig` and `ProductionConfig`). These classes inherit from a base `Config` class and override specific settings as needed.
+
+### APIs and External Services
+
+- The application is set up to interact with external APIs (like UiPath and Spotify), authenticated via OAuth2. Configuration for these APIs, including client IDs and secrets, are managed through environment variables and are loaded in `config.py`.
+- The `routes.py` file contains routes that handle interactions with these external services, abstracting the API logic from the main application flow.

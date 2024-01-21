@@ -1,17 +1,28 @@
 
-*~
-*.sw[mnpcod]
-*.log
-*.tmp
-*.tmp.*
-log.txt
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+.mypy_cache/
+
+# Environment variables
+.env
+
+# Flask file uploads
+app/static/uploads/
+
+# IDE specific settings
+.idea/
 .vscode/
-npm-debug.log*
+*.swp
+
+# Operating System files
+.DS_Store
+Thumbs.db
 
 # Jekyll
 _site/
 Gemfile.lock
 
-
-.idea/
-.sass-cache/
