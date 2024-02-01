@@ -17,6 +17,7 @@ External libraries used:
 """
 from flask import Blueprint, render_template, jsonify, current_app as app
 import requests
+import json
 
 routes = Blueprint('routes', __name__)
 
@@ -48,7 +49,7 @@ def get_uipath_machines():
 
 
 
-@routes.route('/uipath/get-processes')
+@routes.route('/uipath/processes')
 def get_process_data():
     # Use the access token provided by the middleware
     access_token = app.access_token
@@ -64,14 +65,15 @@ def get_process_data():
 
     # Check for successful API response
     if api_response.status_code == 200:
-        data = api_response.json()
+        processes = api_response.json()
         # Further processing of data can be done here as required
-        return jsonify(data)
+        #return jsonify(processes)
+        return render_template('processes.html', processes=processes)
     else:
         return jsonify({'error': 'Failed to retrieve data from the UiPath API', 'status_code': api_response.status_code}), api_response.status_code
 
 
-@routes.route('/uipath/get-releases')
+@routes.route('/uipath/packages')
 def get_uipath_releases():
     # Use the access token provided by the middleware
     access_token = app.access_token
@@ -89,9 +91,10 @@ def get_uipath_releases():
 
     # Check for successful API response
     if api_response.status_code == 200:
-        releases = api_response.json()
+        releases = api_response.json().get('value', [])
         # You can process the data as needed here
-        return jsonify(releases)
+        #return jsonify(releases)
+        return render_template('packages.html', packages=releases, pretty_json = json.dumps(releases, indent=4), title='Packages')
     else:
         #return jsonify({'error': 'Failed to retrieve data from the UiPath API', 'status_code': api_response.status_code}), api_response.status_code
         error_info = {

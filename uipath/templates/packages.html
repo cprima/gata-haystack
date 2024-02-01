@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+<h1>UiPath Packages</h1>
+<table>
+  <thead>
+    <tr>
+      <th>ProcessKey</th>
+      <th>Key</th>
+      <th>ProcessVersion</th>
+      <th>Description</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for process in packages %}
+    <tr>
+      <td>{{ process.ProcessKey }}</td>
+      <td>{{ process.Key }}</td>
+      <td>{{ process.ProcessVersion }}</td>
+      <td>{{ process.Description }}</td>
+      <td>{{ process.Name }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div id="json-container">
+  <pre>{{ pretty_json|safe }}</pre>
+</div>
+
+{% endblock %}

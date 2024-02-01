@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block content %}
+<h1>UiPath Processes</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Key</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for process in processes.value %}
+    <tr>
+      <td>{{ process.Id }}</td>
+      <td>{{ process.Title }}</td>
+      <td>{{ process.Description }}</td>
+      <td>{{ process.Key }}</td>
+      <td>{{ process.Version }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

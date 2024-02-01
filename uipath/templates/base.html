@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - UiPath</title>
+    {% else %}
+    <title>Welcome to rpapub</title>
+    {% endif %}
+
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+        text-align: left;
+      }
+      table {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div>UiPath: <a href="/uipath/machines">machines</a></div>
+    <div>UiPath: <a href="/uipath/processes">processes</a></div>
+    <div>UiPath: <a href="/uipath/packages">packages</a></div>
+    <hr />
+    {% block content %}{% endblock %}
+  </body>
+</html>
